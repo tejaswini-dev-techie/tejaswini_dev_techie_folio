@@ -90,7 +90,7 @@ class AboutSection extends StatelessWidget {
                             ),
                             const SizedBox(height: 16),
                             Text(
-                              'As a Full Stack Developer, I specialize in building robust mobile applications and scalable backend systems using Flutter and Python FastAPI. With over 4 years of experience, I have successfully delivered enterprise-grade solutions that have achieved over 1 crore downloads across various platforms.',
+                              'As a Full Stack Developer, I specialise in building robust mobile applications and scalable backend systems using Flutter and Python FastAPI. With over 4+ years of experience, I have successfully delivered enterprise-grade solutions that have achieved over 1 crore downloads across various platforms.',
                               style: Theme.of(context)
                                   .textTheme
                                   .bodyLarge
