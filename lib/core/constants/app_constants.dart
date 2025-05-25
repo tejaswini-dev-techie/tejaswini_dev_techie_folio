@@ -24,8 +24,6 @@ class AppConstants {
   static const String email = 'tejaswini-dev-techie@gmail.com';
   static const String phone = '+91 7259889622';
 
-  // Resume
-  static const String resumeUrl = 'assets/resume.pdf';
 
   // Breakpoints
   static const double mobileBreakpoint = 450;

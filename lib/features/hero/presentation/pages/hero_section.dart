@@ -269,7 +269,7 @@ class _HeroSectionState extends State<HeroSection> {
 
   Future<void> _handleResumeDownload() async {
     const resumeUrl =
-        'https://docs.google.com/document/d/1Pxj954suoNiVMXpLZhQwfI0LqESC21qoulUnjShUpOU/edit?usp=sharing';
+        'https://docs.google.com/document/d/1uYdvkveWcBGY66fCGOjClqekFd0CIaONxh__XPWGiWo/edit?usp=sharing';
     final uri = Uri.parse(resumeUrl);
     if (await canLaunchUrl(uri)) {
       await launchUrl(uri, mode: LaunchMode.externalApplication);
