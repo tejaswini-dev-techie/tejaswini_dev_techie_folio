@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:responsive_framework/responsive_framework.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:url_launcher/url_launcher.dart';
+
 import '../../../../core/constants/app_constants.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../../../core/widgets/section_container.dart';
@@ -12,8 +12,8 @@ class CertificationsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isMobile = ResponsiveBreakpoints.of(context).smallerThan(MOBILE);
-    final isTablet = ResponsiveBreakpoints.of(context).between(MOBILE, TABLET);
+    // final isMobile = ResponsiveBreakpoints.of(context).smallerThan(MOBILE);
+    // final isTablet = ResponsiveBreakpoints.of(context).between(MOBILE, TABLET);
 
     return SectionContainer(
       sectionId: AppConstants.certificationsId,

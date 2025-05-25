@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:responsive_framework/responsive_framework.dart';
+import 'package:url_launcher/url_launcher.dart';
+
 import '../../../../core/constants/app_constants.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../../../core/widgets/section_container.dart';
-import '../../../../core/providers/section_keys_provider.dart';
 
 class HeroSection extends StatefulWidget {
   const HeroSection({super.key});
@@ -18,28 +18,28 @@ class HeroSection extends StatefulWidget {
 class _HeroSectionState extends State<HeroSection> {
   final ScrollController _scrollController = ScrollController();
 
-  void _scrollToSection(String sectionId) {
-    final key = SectionKeysProvider.getKey(sectionId);
-    if (key.currentContext == null) return;
+  // void _scrollToSection(String sectionId) {
+  //   final key = SectionKeysProvider.getKey(sectionId);
+  //   if (key.currentContext == null) return;
 
-    final RenderBox? box = key.currentContext?.findRenderObject() as RenderBox?;
-    if (box == null) return;
+  //   final RenderBox? box = key.currentContext?.findRenderObject() as RenderBox?;
+  //   if (box == null) return;
 
-    final ScrollableState? scrollable = Scrollable.maybeOf(context);
-    if (scrollable == null) return;
+  //   final ScrollableState? scrollable = Scrollable.maybeOf(context);
+  //   if (scrollable == null) return;
 
-    final targetPosition = box.localToGlobal(Offset.zero);
-    final currentPosition = (context.findRenderObject() as RenderBox?)
-            ?.localToGlobal(Offset.zero) ??
-        Offset.zero;
-    final offset = targetPosition.dy - currentPosition.dy;
+  //   final targetPosition = box.localToGlobal(Offset.zero);
+  //   final currentPosition = (context.findRenderObject() as RenderBox?)
+  //           ?.localToGlobal(Offset.zero) ??
+  //       Offset.zero;
+  //   final offset = targetPosition.dy - currentPosition.dy;
 
-    scrollable.position.animateTo(
-      scrollable.position.pixels + offset,
-      duration: const Duration(milliseconds: 800),
-      curve: Curves.easeInOut,
-    );
-  }
+  //   scrollable.position.animateTo(
+  //     scrollable.position.pixels + offset,
+  //     duration: const Duration(milliseconds: 800),
+  //     curve: Curves.easeInOut,
+  //   );
+  // }
 
   @override
   void dispose() {
@@ -50,7 +50,7 @@ class _HeroSectionState extends State<HeroSection> {
   @override
   Widget build(BuildContext context) {
     final isMobile = ResponsiveBreakpoints.of(context).smallerThan(MOBILE);
-    final isTablet = ResponsiveBreakpoints.of(context).between(MOBILE, TABLET);
+    // final isTablet = ResponsiveBreakpoints.of(context).between(MOBILE, TABLET);
 
     return SectionContainer(
       key: GlobalKey(),
