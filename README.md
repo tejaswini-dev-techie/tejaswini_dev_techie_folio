@@ -40,7 +40,7 @@ I'm currently available for freelance projects! Whether you need:
 - 🚀 Performance optimization
 - 🚀 Full Stack Developer
 
-Let's discuss your project! [Get in touch](#contact)
+Let's discuss your project!
 
 ## 🚀 Quick Start
 
@@ -58,9 +58,9 @@ flutter pub get
 flutter run
 ```
 
-## 📱 Portfolio Preview
+## 📱 Portfolio 
 
-[Add your portfolio screenshots here]
+Check out my portfolio: [tejaswini-dev-techie-folio](https://tejaswini-dev-techie-folio.web.app/)
 
 ## 🏗️ Project Architecture
 
@@ -127,11 +127,7 @@ I'm always excited to:
    ```bash
    firebase deploy
    ```
-
-6. **Access Your Site**
-   - Your site will be available at: `https://your-project-id.web.app`
-   - You can also use: `https://your-project-id.firebaseapp.com`
-
+   
 ### Custom Domain Setup (Optional)
 
 1. **Add Custom Domain in Firebase Console**
