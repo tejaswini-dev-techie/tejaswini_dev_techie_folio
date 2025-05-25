@@ -12,8 +12,14 @@ class ProjectsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isMobile = ResponsiveBreakpoints.of(context).smallerThan(MOBILE);
+    // final isMobile = ResponsiveBreakpoints.of(context).smallerThan(MOBILE);
     final isTablet = ResponsiveBreakpoints.of(context).between(MOBILE, TABLET);
+
+    // Get screen width using MediaQuery
+    final screenWidth = MediaQuery.of(context).size.width;
+    
+    // Consider screens smaller than 600 as mobile
+    final isMobile = screenWidth < 600;
 
     return SectionContainer(
       sectionId: AppConstants.projectsId,

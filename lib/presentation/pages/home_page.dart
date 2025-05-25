@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 import '../../core/theme/app_theme.dart';
 import '../../core/widgets/custom_nav_bar.dart';
@@ -12,7 +12,6 @@ import '../../features/experience/presentation/pages/experience_section.dart';
 import '../../features/hero/presentation/pages/hero_section.dart';
 import '../../features/projects/presentation/pages/projects_section.dart';
 import '../../features/skills/presentation/pages/skills_section.dart';
-import '../../core/utils/responsive_utils.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

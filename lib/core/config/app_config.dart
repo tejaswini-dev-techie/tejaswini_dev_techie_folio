@@ -18,17 +18,6 @@ class AppConfig {
     'Contact',
   ];
 
-  // Social Links
-  static const Map<String, String> socialLinks = {
-    'GitHub': 'https://github.com/yourusername',
-    'LinkedIn': 'https://linkedin.com/in/yourusername',
-    'Twitter': 'https://twitter.com/yourusername',
-    'Email': 'mailto:your.email@example.com',
-  };
-
-  // Resume
-  static const String resumeUrl = 'https://example.com/resume.pdf';
-
   // Responsive Breakpoints
   static List<Breakpoint> get breakpoints => [
         const Breakpoint(start: 0, end: 450, name: MOBILE),
@@ -73,4 +62,3 @@ class AppConfig {
     end: Alignment.bottomRight,
   );
 }
- 

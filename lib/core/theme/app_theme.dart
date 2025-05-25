@@ -62,19 +62,19 @@ class AppTheme {
       ];
 
   // Gradients
-  static LinearGradient get primaryLinearGradient => LinearGradient(
+  static LinearGradient get primaryLinearGradient => const LinearGradient(
         colors: primaryGradient,
         begin: Alignment.topLeft,
         end: Alignment.bottomRight,
       );
 
-  static LinearGradient get accentLinearGradient => LinearGradient(
+  static LinearGradient get accentLinearGradient => const LinearGradient(
         colors: accentGradient,
         begin: Alignment.topLeft,
         end: Alignment.bottomRight,
       );
 
-  static LinearGradient get heroLinearGradient => LinearGradient(
+  static LinearGradient get heroLinearGradient => const LinearGradient(
         colors: heroGradient,
         begin: Alignment.topCenter,
         end: Alignment.bottomCenter,

@@ -1,26 +1,42 @@
 import 'package:flutter/material.dart';
-import 'package:responsive_framework/responsive_framework.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+
 import '../../../../core/constants/app_constants.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../../../core/widgets/section_container.dart';
 import '../../../../core/widgets/section_title.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class ExperienceSection extends StatelessWidget {
   ExperienceSection({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final isMobile = ResponsiveBreakpoints.of(context).smallerThan(MOBILE);
+    // Get screen width using MediaQuery
+    final screenWidth = MediaQuery.of(context).size.width;
+    
+    // Consider screens smaller than 600 as mobile
+    final isMobile = screenWidth < 600;
 
     return SectionContainer(
       sectionId: AppConstants.experienceId,
       child: Column(
         children: [
-          const SectionTitle(
-            title: 'Experience',
-            subtitle: 'My professional journey',
+          Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: isMobile ? 4 : 32,
+              vertical: 8,
+            ),
+            child: Container(
+              constraints: BoxConstraints(
+                maxWidth: isMobile ? screenWidth - 48 : 800,
+              ),
+              child: SectionTitle(
+                title: 'Experience',
+                subtitle: 'My professional journey',
+                isMobile: isMobile,
+                textAlign: TextAlign.center,
+              ),
+            ),
           ),
           const SizedBox(height: 48),
           // Experience Timeline
@@ -48,6 +64,7 @@ class ExperienceSection extends StatelessWidget {
           SizedBox(
             width: 24,
             child: Column(
+              mainAxisSize: MainAxisSize.min,
               children: [
                 Container(
                   width: 24,
@@ -89,7 +106,7 @@ class ExperienceSection extends StatelessWidget {
           // Experience content
           Expanded(
             child: Container(
-              padding: const EdgeInsets.all(24),
+              padding: EdgeInsets.all(isMobile ? 16 : 24),
               decoration: BoxDecoration(
                 color: AppTheme.surface,
                 borderRadius: BorderRadius.circular(16),
@@ -102,80 +119,153 @@ class ExperienceSection extends StatelessWidget {
                 ],
               ),
               child: Column(
+                mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   // Role and Company
-                  Row(
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.all(12),
-                        decoration: BoxDecoration(
-                          color: AppTheme.electricIndigo.withOpacity(0.1),
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: Icon(
-                          experience.icon,
-                          color: AppTheme.electricIndigo,
-                          size: 24,
-                        ),
-                      ),
-                      const SizedBox(width: 16),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                  if (isMobile)
+                    // Mobile Layout
+                    Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
                           children: [
-                            Text(
-                              experience.title,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .headlineSmall
-                                  ?.copyWith(
-                                    color: AppTheme.electricIndigo,
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                            Container(
+                              padding: const EdgeInsets.all(12),
+                              decoration: BoxDecoration(
+                                color: AppTheme.electricIndigo.withOpacity(0.1),
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: Icon(
+                                experience.icon,
+                                color: AppTheme.electricIndigo,
+                                size: 20,
+                              ),
                             ),
-                            Text(
-                              experience.company,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleMedium
-                                  ?.copyWith(
-                                    color: AppTheme.textSecondary,
-                                  ),
+                            const SizedBox(width: 12),
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 12,
+                                vertical: 6,
+                              ),
+                              decoration: BoxDecoration(
+                                color: AppTheme.softCyan.withOpacity(0.1),
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: Text(
+                                experience.duration,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyMedium
+                                    ?.copyWith(
+                                      color: AppTheme.softCyan,
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 13,
+                                    ),
+                              ),
                             ),
                           ],
                         ),
-                      ),
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 12,
-                          vertical: 6,
-                        ),
-                        decoration: BoxDecoration(
-                          color: AppTheme.softCyan.withOpacity(0.1),
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Text(
-                          experience.duration,
+                        const SizedBox(height: 12),
+                        Text(
+                          experience.title,
                           style:
-                              Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                    color: AppTheme.softCyan,
-                                    fontWeight: FontWeight.w500,
+                              Theme.of(context).textTheme.titleLarge?.copyWith(
+                                    color: AppTheme.electricIndigo,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18,
                                   ),
                         ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 24),
+                        const SizedBox(height: 4),
+                        Text(
+                          experience.company,
+                          style:
+                              Theme.of(context).textTheme.titleMedium?.copyWith(
+                                    color: AppTheme.textSecondary,
+                                    fontSize: 15,
+                                  ),
+                        ),
+                      ],
+                    )
+                  else
+                    // Desktop Layout
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(12),
+                          decoration: BoxDecoration(
+                            color: AppTheme.electricIndigo.withOpacity(0.1),
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Icon(
+                            experience.icon,
+                            color: AppTheme.electricIndigo,
+                            size: 24,
+                          ),
+                        ),
+                        const SizedBox(width: 16),
+                        Expanded(
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                experience.title,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headlineSmall
+                                    ?.copyWith(
+                                      color: AppTheme.electricIndigo,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                              ),
+                              Text(
+                                experience.company,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleMedium
+                                    ?.copyWith(
+                                      color: AppTheme.textSecondary,
+                                    ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 12,
+                            vertical: 6,
+                          ),
+                          decoration: BoxDecoration(
+                            color: AppTheme.softCyan.withOpacity(0.1),
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Text(
+                            experience.duration,
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyMedium
+                                ?.copyWith(
+                                  color: AppTheme.softCyan,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  SizedBox(height: isMobile ? 16 : 24),
                   // Description
                   Text(
                     experience.description,
                     style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                           color: AppTheme.textSecondary,
                           height: 1.6,
+                          fontSize: isMobile ? 14 : null,
                         ),
                   ),
-                  const SizedBox(height: 24),
+                  SizedBox(height: isMobile ? 16 : 24),
                   // Achievements
                   if (experience.achievements.isNotEmpty) ...[
                     Text(
@@ -183,20 +273,22 @@ class ExperienceSection extends StatelessWidget {
                       style: Theme.of(context).textTheme.titleMedium?.copyWith(
                             color: AppTheme.electricIndigo,
                             fontWeight: FontWeight.bold,
+                            fontSize: isMobile ? 16 : null,
                           ),
                     ),
-                    const SizedBox(height: 16),
+                    SizedBox(height: isMobile ? 12 : 16),
                     ...experience.achievements.map((achievement) => Padding(
-                          padding: const EdgeInsets.only(bottom: 12),
+                          padding: EdgeInsets.only(bottom: isMobile ? 8 : 12),
                           child: Row(
+                            mainAxisSize: MainAxisSize.min,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Icon(
+                              Icon(
                                 Icons.check_circle,
                                 color: AppTheme.softCyan,
-                                size: 20,
+                                size: isMobile ? 16 : 20,
                               ),
-                              const SizedBox(width: 12),
+                              SizedBox(width: isMobile ? 8 : 12),
                               Expanded(
                                 child: Text(
                                   achievement,
@@ -206,6 +298,7 @@ class ExperienceSection extends StatelessWidget {
                                       ?.copyWith(
                                         color: AppTheme.textSecondary,
                                         height: 1.5,
+                                        fontSize: isMobile ? 13 : null,
                                       ),
                                 ),
                               ),
@@ -213,7 +306,7 @@ class ExperienceSection extends StatelessWidget {
                           ),
                         )),
                   ],
-                  const SizedBox(height: 24),
+                  SizedBox(height: isMobile ? 16 : 24),
                   // Tech Stack
                   if (experience.techStack.isNotEmpty) ...[
                     Text(
@@ -221,17 +314,18 @@ class ExperienceSection extends StatelessWidget {
                       style: Theme.of(context).textTheme.titleMedium?.copyWith(
                             color: AppTheme.electricIndigo,
                             fontWeight: FontWeight.bold,
+                            fontSize: isMobile ? 16 : null,
                           ),
                     ),
-                    const SizedBox(height: 16),
+                    SizedBox(height: isMobile ? 12 : 16),
                     Wrap(
-                      spacing: 8,
-                      runSpacing: 8,
+                      spacing: isMobile ? 6 : 8,
+                      runSpacing: isMobile ? 6 : 8,
                       children: experience.techStack
                           .map((tech) => Container(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 12,
-                                  vertical: 6,
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: isMobile ? 10 : 12,
+                                  vertical: isMobile ? 4 : 6,
                                 ),
                                 decoration: BoxDecoration(
                                   color:
@@ -246,6 +340,7 @@ class ExperienceSection extends StatelessWidget {
                                       ?.copyWith(
                                         color: AppTheme.electricIndigo,
                                         fontWeight: FontWeight.w500,
+                                        fontSize: isMobile ? 13 : null,
                                       ),
                                 ),
                               ))
@@ -331,7 +426,7 @@ class ExperienceSection extends StatelessWidget {
         'Flask',
         'HTML/CSS',
         'SASS'
-        'JavaScript',
+            'JavaScript',
         'SEO',
       ],
     ),

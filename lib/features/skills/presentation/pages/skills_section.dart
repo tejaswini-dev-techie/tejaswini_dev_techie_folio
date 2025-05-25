@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:responsive_framework/responsive_framework.dart';
+
 import '../../../../core/constants/app_constants.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../../../core/widgets/section_container.dart';
@@ -64,7 +64,7 @@ class _SkillsSectionState extends State<SkillsSection> {
       ],
     ),
     SkillCategory(
-      title: 'Backend & APIs',
+      title: 'Backend Development',
       icon: '⚙️',
       skills: [
         Skill(
@@ -86,7 +86,7 @@ class _SkillsSectionState extends State<SkillsSection> {
       ],
     ),
     SkillCategory(
-      title: 'Data & ML',
+      title: 'Data Science & Analytics',
       icon: '📊',
       skills: [
         Skill(
@@ -117,7 +117,7 @@ class _SkillsSectionState extends State<SkillsSection> {
       ],
     ),
     SkillCategory(
-      title: 'Tools & Platforms',
+      title: 'Version Control',
       icon: '🛠️',
       skills: [
         Skill(name: 'Git', level: 5, description: 'Version control system'),
@@ -125,16 +125,48 @@ class _SkillsSectionState extends State<SkillsSection> {
             name: 'GitHub',
             level: 5,
             description: 'Code collaboration platform'),
+      ],
+    ),
+    SkillCategory(
+      title: 'Cloud & Backend Services',
+      icon: '🛠️',
+      skills: [
         Skill(name: 'Firebase', level: 4, description: 'Backend as a Service'),
         Skill(name: 'AWS', level: 3, description: 'Cloud computing platform'),
-        Skill(name: 'JIRA', level: 4, description: 'Project management'),
+        Skill(
+            name: 'Cloud Firestore',
+            level: 4,
+            description: 'Firebase NoSQL database'),
+        Skill(
+            name: 'Push Notifications',
+            level: 4,
+            description: 'Notification service'),
+        Skill(
+            name: 'Cloud Functions',
+            level: 4,
+            description: 'Cloud function service'),
+        Skill(name: 'Analytics', level: 4, description: 'Analytics service'),
+        Skill(
+            name: 'Dynamic Links',
+            level: 4,
+            description: 'Dynamic link service'),
+      ],
+    ),
+    SkillCategory(
+      title: 'Tools & Platforms',
+      icon: '🛠️',
+      skills: [
+        Skill(name: 'JIRA', level: 5, description: 'Project management'),
         Skill(
             name: 'Android Studio',
-            level: 4,
+            level: 5,
             description: 'Android development IDE'),
-        Skill(name: 'Cursor', level: 4, description: 'AI-powered code editor'),
-        Skill(name: 'Jupyter', level: 4, description: 'Interactive computing'),
-        Skill(name: 'Figma', level: 3, description: 'UI/UX design tool'),
+        Skill(
+            name: 'Cursor IDE',
+            level: 4,
+            description: 'AI-powered code editor'),
+        Skill(name: 'Jupyter', level: 5, description: 'Interactive computing'),
+        Skill(name: 'Figma', level: 5, description: 'UI/UX design tool'),
       ],
     ),
   ];
@@ -158,7 +190,13 @@ class _SkillsSectionState extends State<SkillsSection> {
 
   @override
   Widget build(BuildContext context) {
-    final isMobile = ResponsiveBreakpoints.of(context).smallerThan(MOBILE);
+    // final isMobile = ResponsiveBreakpoints.of(context).smallerThan(MOBILE);
+    // final isTablet = ResponsiveBreakpoints.of(context).between(MOBILE, TABLET);
+    // Get screen width using MediaQuery
+    final screenWidth = MediaQuery.of(context).size.width;
+
+    // Consider screens smaller than 600 as mobile
+    final isMobile = screenWidth < 600;
 
     return SectionContainer(
       sectionId: AppConstants.skillsId,
@@ -168,64 +206,88 @@ class _SkillsSectionState extends State<SkillsSection> {
             title: 'Skills & Expertise',
             subtitle: 'Technologies I work with',
           ),
-          const SizedBox(height: 32),
+          SizedBox(height: isMobile ? 24 : 32),
           // Search and View Toggle
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24.0),
-            child: Row(
+            padding: EdgeInsets.symmetric(horizontal: isMobile ? 16 : 24),
+            child: Column(
               children: [
-                Expanded(
-                  child: TextField(
-                    controller: _searchController,
-                    onChanged: (value) => setState(() => _searchQuery = value),
-                    decoration: InputDecoration(
-                      hintText: 'Search skills...',
-                      prefixIcon: const Icon(Icons.search),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                        borderSide: BorderSide(
-                          color: AppTheme.electricIndigo.withOpacity(0.2),
-                        ),
+                TextField(
+                  controller: _searchController,
+                  onChanged: (value) => setState(() => _searchQuery = value),
+                  decoration: InputDecoration(
+                    hintText: 'Search skills...',
+                    prefixIcon: Icon(
+                      Icons.search,
+                      size: isMobile ? 20 : 24,
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: BorderSide(
+                        color: AppTheme.electricIndigo.withOpacity(0.2),
                       ),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                        borderSide: BorderSide(
-                          color: AppTheme.electricIndigo.withOpacity(0.2),
-                        ),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: BorderSide(
+                        color: AppTheme.electricIndigo.withOpacity(0.2),
                       ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                        borderSide: BorderSide(
-                          color: AppTheme.electricIndigo,
-                        ),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: BorderSide(
+                        color: AppTheme.electricIndigo,
                       ),
+                    ),
+                    contentPadding: EdgeInsets.symmetric(
+                      horizontal: isMobile ? 12 : 16,
+                      vertical: isMobile ? 12 : 16,
                     ),
                   ),
                 ),
-                const SizedBox(width: 16),
-                ToggleButtons(
-                  isSelected: [_showByCategory, !_showByCategory],
-                  onPressed: (index) {
-                    setState(() => _showByCategory = index == 0);
-                  },
-                  borderRadius: BorderRadius.circular(12),
-                  selectedColor: AppTheme.electricIndigo,
-                  fillColor: AppTheme.electricIndigo.withOpacity(0.1),
-                  children: const [
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 16.0),
-                      child: Text('By Category'),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 16.0),
-                      child: Text('Alphabetical'),
-                    ),
-                  ],
+                SizedBox(height: isMobile ? 12 : 16),
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: ToggleButtons(
+                    isSelected: [_showByCategory, !_showByCategory],
+                    onPressed: (index) {
+                      setState(() => _showByCategory = index == 0);
+                    },
+                    borderRadius: BorderRadius.circular(12),
+                    selectedColor: AppTheme.electricIndigo,
+                    fillColor: AppTheme.electricIndigo.withOpacity(0.1),
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: isMobile ? 12 : 16,
+                          vertical: isMobile ? 8 : 12,
+                        ),
+                        child: Text(
+                          'By Category',
+                          style: TextStyle(
+                            fontSize: isMobile ? 13 : 14,
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: isMobile ? 12 : 16,
+                          vertical: isMobile ? 8 : 12,
+                        ),
+                        child: Text(
+                          'Alphabetical',
+                          style: TextStyle(
+                            fontSize: isMobile ? 13 : 14,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
           ),
-          const SizedBox(height: 32),
+          SizedBox(height: isMobile ? 24 : 32),
           // Skills Grid
           if (_showByCategory)
             _buildCategoryGrid(isMobile)
@@ -240,16 +302,17 @@ class _SkillsSectionState extends State<SkillsSection> {
     return GridView.builder(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
+      padding: EdgeInsets.symmetric(horizontal: isMobile ? 16 : 24),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: isMobile ? 1 : 2,
-        childAspectRatio: 1.5,
-        crossAxisSpacing: 24,
-        mainAxisSpacing: 24,
+        childAspectRatio: isMobile ? 1 : 1.15,
+        crossAxisSpacing: isMobile ? 16 : 24,
+        mainAxisSpacing: isMobile ? 16 : 24,
       ),
       itemCount: _categories.length,
       itemBuilder: (context, index) {
         final category = _categories[index];
-        return _buildCategoryCard(category);
+        return _buildCategoryCard(category, isMobile);
       },
     );
   }
@@ -258,23 +321,24 @@ class _SkillsSectionState extends State<SkillsSection> {
     return GridView.builder(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
+      padding: EdgeInsets.symmetric(horizontal: isMobile ? 16 : 24),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: isMobile ? 1 : 3,
-        childAspectRatio: 2,
-        crossAxisSpacing: 24,
-        mainAxisSpacing: 24,
+        childAspectRatio: isMobile ? 4.5 : 2,
+        crossAxisSpacing: isMobile ? 16 : 24,
+        mainAxisSpacing: isMobile ? 16 : 24,
       ),
       itemCount: _filteredSkills.length,
       itemBuilder: (context, index) {
         final skill = _filteredSkills[index];
-        return _buildSkillCard(skill);
+        return _buildSkillCard(skill, isMobile);
       },
     );
   }
 
-  Widget _buildCategoryCard(SkillCategory category) {
+  Widget _buildCategoryCard(SkillCategory category, bool isMobile) {
     return Container(
-      padding: const EdgeInsets.all(24),
+      padding: EdgeInsets.all(isMobile ? 16 : 24),
       decoration: BoxDecoration(
         color: AppTheme.surface.withOpacity(0.1),
         borderRadius: BorderRadius.circular(16),
@@ -284,32 +348,37 @@ class _SkillsSectionState extends State<SkillsSection> {
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
         children: [
           Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 category.icon,
-                style: const TextStyle(fontSize: 32),
+                style: TextStyle(fontSize: isMobile ? 24 : 32),
               ),
-              const SizedBox(width: 16),
+              SizedBox(width: isMobile ? 12 : 16),
               Expanded(
                 child: Text(
                   category.title,
                   style: Theme.of(context).textTheme.titleLarge?.copyWith(
                         color: AppTheme.textPrimary,
                         fontWeight: FontWeight.bold,
+                        fontSize: isMobile ? 18 : null,
                       ),
                 ),
               ),
             ],
           ),
-          const SizedBox(height: 16),
+          SizedBox(height: isMobile ? 12 : 16),
           Expanded(
             child: ListView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
               itemCount: category.skills.length,
               itemBuilder: (context, index) {
                 final skill = category.skills[index];
-                return _buildSkillItem(skill);
+                return _buildSkillItem(skill, isMobile);
               },
             ),
           ),
@@ -318,9 +387,9 @@ class _SkillsSectionState extends State<SkillsSection> {
     );
   }
 
-  Widget _buildSkillCard(Skill skill) {
+  Widget _buildSkillCard(Skill skill, bool isMobile) {
     return Container(
-      padding: const EdgeInsets.all(16),
+      padding: EdgeInsets.all(isMobile ? 12 : 16),
       decoration: BoxDecoration(
         color: AppTheme.surface.withOpacity(0.1),
         borderRadius: BorderRadius.circular(12),
@@ -330,8 +399,10 @@ class _SkillsSectionState extends State<SkillsSection> {
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
         children: [
           Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Expanded(
                 child: Text(
@@ -339,27 +410,30 @@ class _SkillsSectionState extends State<SkillsSection> {
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
                         color: AppTheme.textPrimary,
                         fontWeight: FontWeight.bold,
+                        fontSize: isMobile ? 15 : null,
                       ),
                 ),
               ),
               if (skill.level >= 4)
-                const Text('🔥', style: TextStyle(fontSize: 20)),
+                Text('🔥', style: TextStyle(fontSize: isMobile ? 16 : 20)),
             ],
           ),
-          const SizedBox(height: 8),
+          SizedBox(height: isMobile ? 6 : 8),
           Text(
             skill.description,
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                   color: AppTheme.textSecondary,
+                  fontSize: isMobile ? 13 : null,
                 ),
           ),
-          const SizedBox(height: 8),
+          SizedBox(height: isMobile ? 6 : 8),
           Row(
+            mainAxisSize: MainAxisSize.min,
             children: List.generate(
               5,
               (index) => Icon(
                 Icons.star,
-                size: 16,
+                size: isMobile ? 14 : 16,
                 color: index < skill.level
                     ? AppTheme.electricIndigo
                     : AppTheme.textSecondary.withOpacity(0.3),
@@ -371,39 +445,44 @@ class _SkillsSectionState extends State<SkillsSection> {
     );
   }
 
-  Widget _buildSkillItem(Skill skill) {
+  Widget _buildSkillItem(Skill skill, bool isMobile) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 12.0),
+      padding: EdgeInsets.only(bottom: isMobile ? 8 : 12),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
                   skill.name,
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
                         color: AppTheme.textPrimary,
                         fontWeight: FontWeight.w500,
+                        fontSize: isMobile ? 14 : null,
                       ),
                 ),
-                const SizedBox(height: 4),
+                SizedBox(height: isMobile ? 2 : 4),
                 Text(
                   skill.description,
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
                         color: AppTheme.textSecondary,
+                        fontSize: isMobile ? 12 : null,
                       ),
                 ),
               ],
             ),
           ),
-          const SizedBox(width: 16),
+          SizedBox(width: isMobile ? 8 : 12),
           Row(
+            mainAxisSize: MainAxisSize.min,
             children: List.generate(
               5,
               (index) => Icon(
                 Icons.star,
-                size: 16,
+                size: isMobile ? 14 : 16,
                 color: index < skill.level
                     ? AppTheme.electricIndigo
                     : AppTheme.textSecondary.withOpacity(0.3),

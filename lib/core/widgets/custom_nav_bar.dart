@@ -47,7 +47,7 @@ class CustomNavBar extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          'TD',
+          'Tejaswini Dev',
           style: GoogleFonts.inter(
             fontSize: 24,
             color: AppTheme.electricIndigo,
@@ -147,37 +147,39 @@ class CustomNavBar extends StatelessWidget {
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
-      builder: (context) => Container(
-        padding: const EdgeInsets.symmetric(vertical: 32),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: List.generate(
-            8,
-            (index) => ListTile(
-              title: Text(
-                [
-                  'Home',
-                  'About',
-                  'Skills',
-                  'Experience',
-                  'Projects',
-                  'Education',
-                  'Certifications',
-                  'Contact'
-                ][index],
-                style: TextStyle(
-                  color: selectedIndex == index
-                      ? AppTheme.electricIndigo
-                      : AppTheme.softWhite,
-                  fontWeight: selectedIndex == index
-                      ? FontWeight.bold
-                      : FontWeight.normal,
+      builder: (context) => SingleChildScrollView(
+        child: Container(
+          padding: const EdgeInsets.symmetric(vertical: 32),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: List.generate(
+              8,
+              (index) => ListTile(
+                title: Text(
+                  [
+                    'Home',
+                    'About',
+                    'Skills',
+                    'Experience',
+                    'Projects',
+                    'Education',
+                    'Certifications',
+                    'Contact'
+                  ][index],
+                  style: TextStyle(
+                    color: selectedIndex == index
+                        ? AppTheme.electricIndigo
+                        : AppTheme.softWhite,
+                    fontWeight: selectedIndex == index
+                        ? FontWeight.bold
+                        : FontWeight.normal,
+                  ),
                 ),
+                onTap: () {
+                  Navigator.pop(context);
+                  onItemSelected(index);
+                },
               ),
-              onTap: () {
-                Navigator.pop(context);
-                onItemSelected(index);
-              },
             ),
           ),
         ),
