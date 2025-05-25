@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:responsive_framework/responsive_framework.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../core/constants/app_constants.dart';
@@ -49,9 +48,6 @@ class _HeroSectionState extends State<HeroSection> {
 
   @override
   Widget build(BuildContext context) {
-    // final isMobile = ResponsiveBreakpoints.of(context).smallerThan(MOBILE);
-    // final isTablet = ResponsiveBreakpoints.of(context).between(MOBILE, TABLET);
-
     // Get screen width using MediaQuery
     final screenWidth = MediaQuery.of(context).size.width;
 
