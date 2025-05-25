@@ -94,3 +94,87 @@ I'm always excited to:
 
 > "Code is poetry in motion, and I'm here to write beautiful solutions."
 
+## 🚀 Deployment Guide
+
+### Firebase Hosting Setup
+
+1. **Install Firebase CLI**
+   ```bash
+   npm install -g firebase-tools
+   ```
+
+2. **Login to Firebase**
+   ```bash
+   firebase login
+   ```
+
+3. **Initialize Firebase in your project**
+   ```bash
+   firebase init
+   ```
+   - Select "Hosting"
+   - Choose your Firebase project
+   - Set public directory as "build/web"
+   - Configure as single-page app: Yes
+   - Set up automatic builds: No
+
+4. **Build Flutter Web**
+   ```bash
+   flutter build web --release
+   ```
+
+5. **Deploy to Firebase**
+   ```bash
+   firebase deploy
+   ```
+
+6. **Access Your Site**
+   - Your site will be available at: `https://your-project-id.web.app`
+   - You can also use: `https://your-project-id.firebaseapp.com`
+
+### Custom Domain Setup (Optional)
+
+1. **Add Custom Domain in Firebase Console**
+   - Go to Firebase Console > Hosting
+   - Click "Add custom domain"
+   - Follow the DNS configuration steps
+
+2. **Update DNS Records**
+   - Add the provided TXT records
+   - Add the provided A records
+   - Wait for DNS propagation (can take up to 48 hours)
+
+3. **Verify Domain**
+   - Firebase will automatically verify your domain
+   - SSL certificate will be provisioned
+
+### Continuous Deployment (Optional)
+
+1. **Set up GitHub Actions**
+   Create `.github/workflows/firebase-hosting.yml`:
+   ```yaml
+   name: Deploy to Firebase Hosting
+   on:
+     push:
+       branches: [ main ]
+   jobs:
+     build_and_deploy:
+       runs-on: ubuntu-latest
+       steps:
+         - uses: actions/checkout@v3
+         - uses: subosito/flutter-action@v2
+         - run: flutter pub get
+         - run: flutter build web
+         - uses: FirebaseExtended/action-hosting-deploy@v0
+           with:
+             repoToken: '${{ secrets.GITHUB_TOKEN }}'
+             firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}'
+             channelId: live
+             projectId: your-project-id
+   ```
+
+2. **Add Firebase Service Account Secret**
+   - Go to Project Settings > Service Accounts
+   - Generate new private key
+   - Add to GitHub repository secrets as `FIREBASE_SERVICE_ACCOUNT`
+
