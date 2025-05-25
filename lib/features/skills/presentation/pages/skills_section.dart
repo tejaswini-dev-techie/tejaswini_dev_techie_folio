@@ -305,7 +305,7 @@ class _SkillsSectionState extends State<SkillsSection> {
       padding: EdgeInsets.symmetric(horizontal: isMobile ? 16 : 24),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: isMobile ? 1 : 2,
-        childAspectRatio: isMobile ? 1 : 1.15,
+        childAspectRatio: isMobile ? 0.85 : 1.15,
         crossAxisSpacing: isMobile ? 16 : 24,
         mainAxisSpacing: isMobile ? 16 : 24,
       ),

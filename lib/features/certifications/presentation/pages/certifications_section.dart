@@ -12,8 +12,8 @@ class CertificationsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final isMobile = ResponsiveBreakpoints.of(context).smallerThan(MOBILE);
-    // final isTablet = ResponsiveBreakpoints.of(context).between(MOBILE, TABLET);
+    final screenWidth = MediaQuery.of(context).size.width;
+    final isMobile = screenWidth < 600;
 
     return SectionContainer(
       sectionId: AppConstants.certificationsId,
@@ -26,10 +26,13 @@ class CertificationsSection extends StatelessWidget {
             titleColor: Colors.white,
             subtitleColor: AppTheme.softCyan,
           ),
-          const SizedBox(height: 48),
+          SizedBox(height: isMobile ? 32 : 48),
           // Timeline Container
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
+            padding: EdgeInsets.symmetric(
+              horizontal: isMobile ? 16 : 24,
+              vertical: isMobile ? 24 : 32,
+            ),
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment.topLeft,
@@ -60,10 +63,10 @@ class CertificationsSection extends StatelessWidget {
                   physics: const NeverScrollableScrollPhysics(),
                   itemCount: _certifications.length,
                   separatorBuilder: (context, index) =>
-                      const SizedBox(height: 24),
+                      SizedBox(height: isMobile ? 16 : 24),
                   itemBuilder: (context, index) {
                     final cert = _certifications[index];
-                    return _buildTimelineItem(context, cert, index);
+                    return _buildTimelineItem(context, cert, index, isMobile);
                   },
                 ),
               ],
@@ -75,18 +78,18 @@ class CertificationsSection extends StatelessWidget {
   }
 
   Widget _buildTimelineItem(
-      BuildContext context, Certification cert, int index) {
+      BuildContext context, Certification cert, int index, bool isMobile) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         // Timeline Line and Dot
         SizedBox(
-          width: 100,
+          width: isMobile ? 60 : 100,
           child: Column(
             children: [
               Container(
-                width: 12,
-                height: 12,
+                width: isMobile ? 8 : 12,
+                height: isMobile ? 8 : 12,
                 decoration: BoxDecoration(
                   gradient: const LinearGradient(
                     begin: Alignment.topLeft,
@@ -109,7 +112,7 @@ class CertificationsSection extends StatelessWidget {
               if (index < _certifications.length - 1)
                 Container(
                   width: 2,
-                  height: 60,
+                  height: isMobile ? 40 : 60,
                   decoration: const BoxDecoration(
                     gradient: LinearGradient(
                       begin: Alignment.topCenter,
@@ -132,7 +135,7 @@ class CertificationsSection extends StatelessWidget {
               onTap: () => _handleCertificateTap(cert),
               borderRadius: BorderRadius.circular(16),
               child: Container(
-                padding: const EdgeInsets.all(20),
+                padding: EdgeInsets.all(isMobile ? 16 : 20),
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     begin: Alignment.topLeft,
@@ -162,7 +165,7 @@ class CertificationsSection extends StatelessWidget {
                       children: [
                         // Issuer Logo
                         Container(
-                          padding: const EdgeInsets.all(8),
+                          padding: EdgeInsets.all(isMobile ? 6 : 8),
                           decoration: BoxDecoration(
                             gradient: const LinearGradient(
                               begin: Alignment.topLeft,
@@ -177,10 +180,10 @@ class CertificationsSection extends StatelessWidget {
                           child: Icon(
                             cert.icon,
                             color: Colors.white,
-                            size: 20,
+                            size: isMobile ? 16 : 20,
                           ),
                         ),
-                        const SizedBox(width: 12),
+                        SizedBox(width: isMobile ? 8 : 12),
                         // Title and Issuer
                         Expanded(
                           child: Column(
@@ -195,6 +198,7 @@ class CertificationsSection extends StatelessWidget {
                                       color: Colors.white,
                                       fontWeight: FontWeight.w600,
                                       letterSpacing: 0.5,
+                                      fontSize: isMobile ? 14 : 16,
                                     ),
                               ),
                               const SizedBox(height: 4),
@@ -206,6 +210,7 @@ class CertificationsSection extends StatelessWidget {
                                     ?.copyWith(
                                       color: AppTheme.softCyan,
                                       fontWeight: FontWeight.w500,
+                                      fontSize: isMobile ? 12 : 14,
                                     ),
                               ),
                             ],
@@ -213,9 +218,9 @@ class CertificationsSection extends StatelessWidget {
                         ),
                         // View Certificate Button
                         Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 12,
-                            vertical: 6,
+                          padding: EdgeInsets.symmetric(
+                            horizontal: isMobile ? 8 : 12,
+                            vertical: isMobile ? 4 : 6,
                           ),
                           decoration: BoxDecoration(
                             gradient: const LinearGradient(
@@ -238,12 +243,12 @@ class CertificationsSection extends StatelessWidget {
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              const Icon(
+                              Icon(
                                 Icons.verified,
                                 color: Colors.white,
-                                size: 16,
+                                size: isMobile ? 14 : 16,
                               ),
-                              const SizedBox(width: 8),
+                              SizedBox(width: isMobile ? 4 : 8),
                               Text(
                                 'View',
                                 style: Theme.of(context)
@@ -252,6 +257,7 @@ class CertificationsSection extends StatelessWidget {
                                     ?.copyWith(
                                       color: Colors.white,
                                       fontWeight: FontWeight.w600,
+                                      fontSize: isMobile ? 12 : 14,
                                     ),
                               ),
                             ],

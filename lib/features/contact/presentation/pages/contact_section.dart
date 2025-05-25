@@ -16,7 +16,7 @@ class ContactSection extends StatelessWidget {
     // final isTablet = ResponsiveBreakpoints.of(context).between(MOBILE, TABLET);
     // Get screen width using MediaQuery
     final screenWidth = MediaQuery.of(context).size.width;
-    
+
     // Consider screens smaller than 600 as mobile
     final isMobile = screenWidth < 600;
 
@@ -129,10 +129,10 @@ class ContactSection extends StatelessWidget {
                                     ),
                                     borderRadius: BorderRadius.circular(8),
                                   ),
-                                  child: const Icon(
+                                  child: Icon(
                                     Icons.email,
                                     color: Colors.white,
-                                    size: 24,
+                                    size: isMobile ? 20 : 24,
                                   ),
                                 ),
                                 const SizedBox(width: 16),
@@ -145,6 +145,7 @@ class ContactSection extends StatelessWidget {
                                         color: Colors.white,
                                         fontWeight: FontWeight.w600,
                                         letterSpacing: 0.5,
+                                        fontSize: isMobile ? 12 : 16,
                                       ),
                                 ),
                               ],
@@ -153,7 +154,7 @@ class ContactSection extends StatelessWidget {
                             Material(
                               color: Colors.transparent,
                               child: InkWell(
-                                onTap: () => _handleContactTap(_contacts.first),
+                                onTap: () => _handleEmailTap(),
                                 borderRadius: BorderRadius.circular(8),
                                 child: Container(
                                   padding: const EdgeInsets.symmetric(
@@ -226,13 +227,14 @@ class ContactSection extends StatelessWidget {
                                     color: Colors.white,
                                     fontWeight: FontWeight.w600,
                                     letterSpacing: 0.5,
+                                    fontSize: isMobile ? 12 : 16,
                                   ),
                             ),
                             const SizedBox(width: 16),
                             Material(
                               color: Colors.transparent,
                               child: InkWell(
-                                onTap: () => _handleContactTap(_contacts.first),
+                                onTap: () => _handleEmailTap(),
                                 borderRadius: BorderRadius.circular(8),
                                 child: Container(
                                   padding: const EdgeInsets.symmetric(
@@ -359,6 +361,13 @@ class ContactSection extends StatelessWidget {
           end: const Offset(1, 1),
           curve: Curves.easeOut,
         );
+  }
+
+  Future<void> _handleEmailTap() async {
+    final Uri emailUri = Uri.parse('mailto:tejaswinidev24@gmail.com');
+    if (await canLaunchUrl(emailUri)) {
+      await launchUrl(emailUri);
+    }
   }
 
   Future<void> _handleContactTap(Contact contact) async {
