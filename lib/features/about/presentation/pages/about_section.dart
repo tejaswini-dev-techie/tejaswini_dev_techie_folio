@@ -15,7 +15,7 @@ class AboutSection extends StatelessWidget {
     // final isTablet = ResponsiveBreakpoints.of(context).between(MOBILE, TABLET);
     // Get screen width using MediaQuery
     final screenWidth = MediaQuery.of(context).size.width;
-    
+
     // Consider screens smaller than 600 as mobile
     final isMobile = screenWidth < 600;
 
@@ -331,6 +331,12 @@ class AboutSection extends StatelessWidget {
                 context,
                 'Read More Expandable Text',
                 'https://pub.dev/packages/readmore_expandable_text',
+                isMobile,
+              ),
+              _buildPackageLink(
+                context,
+                'Adaptive Ticket View',
+                'https://pub.dev/packages/adaptive_ticket_view',
                 isMobile,
               ),
             ],
