@@ -339,6 +339,12 @@ class AboutSection extends StatelessWidget {
                 'https://pub.dev/packages/adaptive_ticket_view',
                 isMobile,
               ),
+              _buildPackageLink(
+                context,
+                'Expandable Content List',
+                'https://pub.dev/packages/expandable_content_list',
+                isMobile,
+              ),
             ],
           ),
         ],
